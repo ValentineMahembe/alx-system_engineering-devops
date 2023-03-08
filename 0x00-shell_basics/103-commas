@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(ls -A1mpva | tr -d ' ')
+ls -xamp
