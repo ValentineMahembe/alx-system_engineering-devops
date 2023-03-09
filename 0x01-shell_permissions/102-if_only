@@ -1,4 +1,2 @@
 #!/bin/bash
-if [ "$current_owner" = "guillaume" ]; then
-  chown betty hello
-fi
+chown --from=guillaume betty hello
