@@ -5,4 +5,4 @@
 # The -e option ensures that all processes are displayed.
 # The -f option provides a full-format listing.
 # The --forest option shows the process hierarchy.
-ps -ef --forest
+ps -a uf
