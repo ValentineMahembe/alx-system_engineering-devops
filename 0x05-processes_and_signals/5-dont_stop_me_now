@@ -2,5 +2,5 @@
 # This script stops the 4-to_infinity_and_beyond process.
 
 # Use the kill command to send a SIGTERM signal to the process.
-killall -SIGTERM 4-to_infinity_and_beyond
+kill "$(pgrep -f 4-to_infinity_and_beyond)"
 
