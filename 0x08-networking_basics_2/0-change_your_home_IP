@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # Backup the original hosts file
 cp /etc/hosts /etc/hosts.bak
 
