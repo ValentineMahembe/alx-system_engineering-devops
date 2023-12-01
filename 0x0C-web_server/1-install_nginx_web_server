@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script installs nginx on the server and sets it up
+
+# Update the package lists for upgrades and new package installations
+apt-get update
+
+# Install nginx
+apt-get install -y nginx
+
+# Create a new nginx configuration file
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html;
+    server_name _;
+    location / {
+        return 200 'Hello World!';
+        add_header Content-Type text/plain;
+    }
+}" > /etc/nginx/sites-available/default
+
+# Restart nginx
+service nginx restart
