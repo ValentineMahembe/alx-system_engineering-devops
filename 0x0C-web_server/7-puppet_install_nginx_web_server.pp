@@ -1,3 +1,5 @@
+# Setup web server using Puppet
+
 class nginx_install {
   package { 'nginx':
     ensure => installed,
