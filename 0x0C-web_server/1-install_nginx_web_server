@@ -1,24 +1,9 @@
 #!/usr/bin/env bash
 # This script installs nginx on the server and sets it up
-
-# Update the package lists for upgrades and new package installations
+#Nginx should be listening on port 80
+#When querying Nginx at its root / with a GET request (requesting a page)
+# using curl, it must return a page that contains the string Hello World!
 apt-get update
-
-# Install nginx
 apt-get install -y nginx
-
-# Create a new nginx configuration file
-echo "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html;
-    server_name _;
-    location / {
-        return 200 'Hello World!';
-        add_header Content-Type text/plain;
-    }
-}" > /etc/nginx/sites-available/default
-
-# Restart nginx
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 service nginx restart
