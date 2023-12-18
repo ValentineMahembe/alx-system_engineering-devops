@@ -1,0 +1,18 @@
+#!/bin/bash
+# This script installs ufw and blocks all traffic except for ports 2443 and 80
+sudo apt-get update
+sudo apt-get install ufw
+
+# Deny all incoming traffic by default
+sudo ufw default deny incoming
+
+# Allow outgoing traffic by default
+sudo ufw default allow outgoing
+
+# Allow incoming traffic on ports 22 (SSH), 443 (HTTPS/SSL), and 80 (HTTP)
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+
+# Enable the firewall
+sudo ufw enable
