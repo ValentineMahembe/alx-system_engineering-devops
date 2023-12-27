@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-# This script configures the container to run Nginx as the ngnix user
-# and listen on port 8080
+# Run Nginx as Nginx
+# Create a new user "nginx" if it doesn't exist
+if ! id -u nginx >/dev/null 2>&1; then
+    adduser --system --no-create-home --disabled-login --disabled-password --group nginx
+fi
 
-#Stop the Nginx service
-service nginx stop
+# Update Nginx config
+sed -i 's/user\s*[^;]*;/user nginx;/g' /etc/nginx/nginx.conf
+sed -i 's/listen\s*[^;]*;/listen 8080;/g' /etc/nginx/nginx.conf
 
-#Change the user in the Nginx configuration
-sed -i 's/user root;/user nginx;/' /etc/nginx/nginx.conf
-
-# Change the listen directive to listen on port 8080
-sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
-
-#Start the Nginx service
-service nginx start
+service nginx restart
