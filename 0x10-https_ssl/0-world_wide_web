@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# This script displays information about subdomains
+
+# Function to check and print domain info
+check_domain() {
+    local domain
+    local subdomain
+    local record_info
+    local record_type
+    local destination
+    domain=$1
+    subdomain=$2
+    record_info=$(dig "$subdomain"."$domain" | grep -A1 'ANSWER SECTION:')
+    record_type=$(echo "$record_info" | awk '{print $5}')
+    destination=$(echo "$record_info" | awk '{print $6}')
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+# Main script
+domain=$1
+subdomain=$2
+
+if [[ -z "$subdomain" ]]; then
+    # If no subdomain is provided, check for these subdomains
+    check_domain "$domain" "www"
+    check_domain "$domain" "lb-01"
+    check_domain "$domain" "web-01"
+    check_domain "$domain" "web-02"
+else
+    # If a subdomain is provided, check only for that
+    check_domain "$domain" "$subdomain"
+fi
